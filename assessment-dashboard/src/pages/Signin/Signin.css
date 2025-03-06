@@ -1,20 +1,12 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #4a90e2, #007bff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  height: 100vh;
   padding-right: 40px;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #007bff;
 }
 
 .login-box {

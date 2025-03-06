@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Signin.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -15,7 +16,7 @@ const Login = () => {
     return (
         <div className="login-container">
             <div className="login-box">
-                <h2>Sign In</h2>
+                <h2>Log In</h2>
                 <input
                     type="email"
                     name="email"
@@ -43,7 +44,7 @@ const Login = () => {
                 </div>
                 <button className="login-btn">Login</button>
                 <p className="signup-link">
-                    Don't have an account? <a href="/signup">Signup Here</a>
+                    Don't have an account? <Link to="/signup">Signup Here</Link>
                 </p>
             </div>
         </div>
