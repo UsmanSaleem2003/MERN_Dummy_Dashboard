@@ -1,58 +1,27 @@
-// import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home/Home";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Signin from "./pages/Signin/Signin";
 import Signup from "./pages/Signup/Signup";
+import { useAuth } from "./context/authContext";
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const isLoggedIn = true;
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   checkAuthStatus();
-  // }, []);
-
-  // const checkAuthStatus = async () => {
-  //   try {
-  //     const response = await fetch('http://localhost:4000/check-auth', {
-  //       credentials: 'include'
-  //     });
-  //     const data = await response.json();
-  //     setIsLoggedIn(data.isAuthenticated);
-  //   } catch (error) {
-  //     console.error('Error checking authentication:', error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+  const { token } = useAuth();
+  const isLoggedIn = !!token;
 
   return (
     <BrowserRouter>
-      <div className='app-container'>
+      <div className="app-container">
         {isLoggedIn && <Sidebar />}
-        <div className='routess' style={{ marginLeft: isLoggedIn ? '200px' : '0px' }}>
+        <div className="routess" style={{ marginLeft: isLoggedIn ? "200px" : "0px" }}>
           <Routes>
-            {isLoggedIn ? (
-              <>
-                <Route path="/" element={<Home />} />
-                <Route path="/edit-profile" element={<EditProfile />} />
-                <Route path="*" element={<Navigate replace to="/" />} />
-              </>
-            ) : (
-              <>
-                <Route path="/login" element={<Signin />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="*" element={<Navigate replace to="/login" />} />
-              </>
-            )}
+            <Route path="/" element={isLoggedIn ? <Home /> : <Navigate replace to="/login" />} />
+            <Route path="/edit-profile" element={isLoggedIn ? <EditProfile /> : <Navigate replace to="/login" />} />
+            <Route path="/login" element={isLoggedIn ? <Navigate replace to="/" /> : <Signin />} />
+            <Route path="/signup" element={isLoggedIn ? <Navigate replace to="/" /> : <Signup />} />
+            <Route path="*" element={<Navigate replace to={isLoggedIn ? "/" : "/login"} />} />
           </Routes>
         </div>
       </div>

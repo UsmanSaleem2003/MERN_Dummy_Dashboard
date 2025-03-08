@@ -1,48 +1,79 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 import "./Signup.css";
-import { Link } from "react-router-dom";
 
 const Signup = () => {
-    const [passwordVisible, setPasswordVisible] = useState(false);
     const [formData, setFormData] = useState({
+        username: "",
         email: "",
         password: "",
     });
 
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:5000/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                login(data.token, data.user);
+                navigate("/");
+            } else {
+                alert("Error: " + data.error);
+            }
+        } catch (error) {
+            console.error("Signup Error:", error);
+            alert("Something went wrong. Try again.");
+        }
     };
 
     return (
         <div className="signup-container">
             <div className="signup-box">
                 <h2>Sign Up</h2>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type={passwordVisible ? "text" : "password"}
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <div className="checkbox-container">
+                <form onSubmit={handleSubmit}>
                     <input
-                        type="checkbox"
-                        id="showPassword"
-                        checked={passwordVisible}
-                        onChange={() => setPasswordVisible(!passwordVisible)}
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
                     />
-                    <label htmlFor="showPassword">Show Password</label>
-                </div>
-                <button className="signup-btn">Signup</button>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit" className="signup-btn">Signup</button>
+                </form>
                 <p className="signup-link">
                     Already have an account? <Link to="/login">Login Here</Link>
                 </p>

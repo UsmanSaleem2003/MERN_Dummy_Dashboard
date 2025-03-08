@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area, CartesianGrid, PieChart, Pie, Cell, Legend } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, CartesianGrid, PieChart, Pie, Cell, Legend } from "recharts";
 import { FaBars } from "react-icons/fa";
 import dollar_icon from "../../components/Assets/dollar_icon.png"
 import like_icon from "../../components/Assets/like_icon.png"
