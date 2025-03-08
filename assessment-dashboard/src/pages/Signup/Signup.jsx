@@ -9,6 +9,9 @@ const Signup = () => {
         email: "",
         password: "",
     });
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
 
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -35,11 +38,13 @@ const Signup = () => {
                 login(data.token, data.user);
                 navigate("/");
             } else {
-                alert("Error: " + data.error);
+                setError(true);
+                setErrorMessage("Wrong Credentials");
             }
         } catch (error) {
+            setError(true);
+            setErrorMessage("Server Error");
             console.error("Signup Error:", error);
-            alert("Something went wrong. Try again.");
         }
     };
 
@@ -73,6 +78,7 @@ const Signup = () => {
                         required
                     />
                     <button type="submit" className="signup-btn">Signup</button>
+                    {error && errorMessage}
                 </form>
                 <p className="signup-link">
                     Already have an account? <Link to="/login">Login Here</Link>
