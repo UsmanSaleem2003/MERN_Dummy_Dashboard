@@ -107,11 +107,11 @@
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  width: 91%;
   text-align: center;
 }
 
-.side-chart {
+/* .side-chart {
   background: white;
   border-radius: 8px;
   margin-top: 10px;
@@ -119,8 +119,44 @@
   width: 250px;
   text-align: center;
   margin-right: 12px;
+  } */
+
+.side-chart {
+  background: white;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 220px;
+  text-align: center;
+  padding: 15px;
+  margin-right: 12px;
 }
 
+.ppie {
+  display: flex;
+  justify-content: center;
+}
+
+.percentage-label {
+  position: relative;
+  bottom: 16.5%;
+  left: 1%;
+  /* transform: translate(-50%, -50%); */
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.check-btn {
+  background: #f5a623;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
 /* #8360bb */
 
 ::-webkit-scrollbar {

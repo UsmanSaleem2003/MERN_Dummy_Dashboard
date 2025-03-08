@@ -39,8 +39,12 @@ const areaData = [
     { name: "Dec", value1: 90, value2: 85 },
 ];
 
-const pieData = [{ name: "Progress", value: 45 }, { name: "Remaining", value: 55 }];
-const colors = ["#ff9f00", "#ddd"];
+const pieData = [
+    { name: "Filled", value: 45 },
+    { name: "Remaining", value: 55 },
+];
+
+const colors = ["#0D2C56", "#F5A623"];
 
 const Dashboard = () => {
     return (
@@ -143,30 +147,47 @@ const Dashboard = () => {
 
 
                 <div className="side-chart">
-                    <h3>45%</h3>
+                    {/* <h3>45%</h3>
                     <PieChart width={150} height={150}>
                         <Pie data={pieData} dataKey="value" cx="50%" cy="50%" outerRadius={50}>
                             {pieData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={colors[index]} />
                             ))}
                         </Pie>
-                    </PieChart>
+                    </PieChart> */}
+
+                    <div className="ppie">
+                        <PieChart width={120} height={120}>
+                            <Pie
+                                data={pieData}
+                                dataKey="value"
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={30}
+                                outerRadius={55}
+                                startAngle={90}
+                                endAngle={-270}
+                            >
+                                {pieData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={colors[index]} />
+                                ))}
+                            </Pie>
+                        </PieChart>
+
+                    </div>
+                    <div className="percentage-label">45%</div>
+
+                    <p>Lorem Ipsum</p>
+                    <p>Lorem Ipsum</p>
+                    <p>Lorem Ipsum</p>
+
+                    <button className="check-btn">Check Now</button>
+
                 </div>
             </div>
 
         </div>
     );
 };
-
-{/* <div className="side-container">
-    <h3>45%</h3>
-    <PieChart width={150} height={150}>
-        <Pie data={pieData} dataKey="value" cx="50%" cy="50%" outerRadius={50}>
-            {pieData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index]} />
-            ))}
-        </Pie>
-    </PieChart>
-</div> */}
 
 export default Dashboard;
