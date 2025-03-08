@@ -25,18 +25,18 @@ const barData = [
 
 
 const areaData = [
-    { name: "Jan", value1: 30, value2: 10 },
-    { name: "Feb", value1: 70, value2: 50 },
-    { name: "Mar", value1: 40, value2: 30 },
-    { name: "Apr", value1: 99, value2: 60 },
-    { name: "May", value1: 50, value2: 20 },
-    { name: "Jun", value1: 95, value2: 80 },
-    { name: "Jul", value1: 60, value2: 40 },
-    { name: "Aug", value1: 80, value2: 70 },
-    { name: "Sep", value1: 30, value2: 10 },
-    { name: "Oct", value1: 75, value2: 55 },
-    { name: "Nov", value1: 45, value2: 25 },
-    { name: "Dec", value1: 90, value2: 85 },
+    { name: "Jan", "total": 30, "detected": 10 },
+    { name: "Feb", "total": 70, "detected": 50 },
+    { name: "Mar", "total": 40, "detected": 30 },
+    { name: "Apr", "total": 99, "detected": 60 },
+    { name: "May", "total": 50, "detected": 20 },
+    { name: "Jun", "total": 95, "detected": 80 },
+    { name: "Jul", "total": 60, "detected": 40 },
+    { name: "Aug", "total": 80, "detected": 70 },
+    { name: "Sep", "total": 30, "detected": 10 },
+    { name: "Oct", "total": 75, "detected": 55 },
+    { name: "Nov", "total": 45, "detected": 25 },
+    { name: "Dec", "total": 90, "detected": 85 },
 ];
 
 const pieData = [
@@ -123,9 +123,17 @@ const Dashboard = () => {
                                 <YAxis />
                                 <CartesianGrid strokeDasharray="3 3" stroke="lightgrey" vertical={false} />
                                 <Tooltip />
+                                <Legend
+                                    payload={[
+                                        {
+                                            value: "Detected Phishing Emails", type: "square", color: "#ff9f00"
+                                        },
+                                        { value: "Total Emails Received", type: "square", color: "#002b5b" }
+                                    ]}
+                                />
                                 <Area
                                     type="basis"
-                                    dataKey="value1"
+                                    dataKey="total"
                                     fill="url(#colorValue1)"
                                     stroke="#002b5b"
                                     strokeWidth={2}
@@ -133,12 +141,15 @@ const Dashboard = () => {
                                 />
                                 <Area
                                     type="basis"
-                                    dataKey="value2"
+                                    dataKey="detected"
                                     fill="url(#colorValue2)"
                                     stroke="#ff9f00"
                                     strokeWidth={2}
                                     strokeOpacity={0.9}
                                 />
+                                <Bar dataKey="detected" fill="rgba(0, 43, 91, 0.9)" name="Detected Phishing Emails" />
+                                <Bar dataKey="total" fill="rgba(255, 159, 0, 0.9)" name="Total Emails Received" />
+
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
@@ -147,15 +158,6 @@ const Dashboard = () => {
 
 
                 <div className="side-chart">
-                    {/* <h3>45%</h3>
-                    <PieChart width={150} height={150}>
-                        <Pie data={pieData} dataKey="value" cx="50%" cy="50%" outerRadius={50}>
-                            {pieData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={colors[index]} />
-                            ))}
-                        </Pie>
-                    </PieChart> */}
-
                     <div className="ppie">
                         <PieChart width={120} height={120}>
                             <Pie
@@ -173,13 +175,13 @@ const Dashboard = () => {
                                 ))}
                             </Pie>
                         </PieChart>
-
                     </div>
+
                     <div className="percentage-label">45%</div>
 
-                    <p>Lorem Ipsum</p>
-                    <p>Lorem Ipsum</p>
-                    <p>Lorem Ipsum</p>
+                    <p className="pie-text">Lorem Ipsum</p>
+                    <p className="pie-text">Lorem Ipsum</p>
+                    <p className="pie-text">Lorem Ipsum</p>
 
                     <button className="check-btn">Check Now</button>
 
