@@ -15,32 +15,25 @@ export default function Sidebar() {
     const user = {
         name: "Usman",
         email: "usmansaleem2k3@gmail.com",
-        profileImage: profilePlaceholder, // Replace this with the user's actual image if available
+        profileImage: profilePlaceholder,
     };
-
     const logout = async () => {
         try {
-            const response = await fetch("http://localhost:4000/logout", {
-                method: "GET",
-                credentials: "include",
-            });
-            if (response.ok) {
-                window.location.href = "/login";
-            } else {
-                alert("Failed to logout");
-            }
+            localStorage.removeItem("token");
+            window.location.href = "/login";
         } catch (error) {
             console.error("Logout error:", error);
             alert("An unexpected error occurred");
         }
     };
 
+
     return (
         <div className="sidebar">
             <div className="profile-section">
-                <img src={user.profileImage} alt="Profile" className="profile-image" />
-                <h2 className="user-name">{user.name}</h2>
-                <p className="user-email">{user.email}</p>
+                <img src={user?.profileImage || profilePlaceholder} alt="Profile" className="profile-image" />
+                <h2 className="user-name">{user?.name || "Guest"}</h2>
+                <p className="user-email">{user?.email || "Not logged in"}</p>
             </div>
 
             <div className="sidebar-btns">
