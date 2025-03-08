@@ -8,7 +8,7 @@ import Signup from "./pages/Signup/Signup";
 
 function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   // const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
