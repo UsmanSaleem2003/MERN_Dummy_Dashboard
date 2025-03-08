@@ -49,7 +49,7 @@ export default function Sidebar() {
                 <Link to={"/messages"}><img src={messages_icon} alt="messages" /><span>Messages</span></Link>
                 <Link to={"/notifications"}><img src={notification_icon} alt="notifications" /><span>Notification</span></Link>
                 <Link to={"/location"}><img src={location_icon} alt="location" /><span>Location</span></Link>
-                <Link to={"/profile"}><img src={profile_icon} alt='profile_icon' /><span>Edit Profile</span></Link>
+                <Link to={"/edit-profile"}><img src={profile_icon} alt='profile_icon' /><span>Edit Profile</span></Link>
                 <button onClick={logout} className="logout-btn">
                     <img src={logout_icon} alt="logout" className="logout-icon" />
                     <span className="logout-text">Logout</span>

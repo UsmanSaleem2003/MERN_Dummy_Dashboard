@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home/Home";
+import EditProfile from "./pages/EditProfile/EditProfile";
 import Signin from "./pages/Signin/Signin";
 import Signup from "./pages/Signup/Signup";
 
@@ -42,6 +43,7 @@ function App() {
             {isLoggedIn ? (
               <>
                 <Route path="/" element={<Home />} />
+                <Route path="/edit-profile" element={<EditProfile />} />
                 <Route path="*" element={<Navigate replace to="/" />} />
               </>
             ) : (
