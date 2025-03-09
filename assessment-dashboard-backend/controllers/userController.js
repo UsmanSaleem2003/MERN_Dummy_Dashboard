@@ -35,24 +35,6 @@ const updateUserProfile = async (req, res) => {
 };
 
 
-// const getUserData = async (req, res) => {
-//     try {
-//         const token = req.headers.authorization?.split(" ")[1];
-//         if (!token) return res.status(401).json({ message: "Unauthorized" });
-
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//         const user = await User.findById(decoded.userId).select("-password");
-
-//         if (!user) return res.status(404).json({ message: "User not found" });
-
-//         res.json({ user });
-//     } catch (error) {
-//         console.error("Error fetching user:", error);
-//         res.status(500).json({ message: "Server error" });
-//     }
-// };
-
-
 const getUserData = async (req, res) => {
     try {
         const token = req.headers.authorization?.split(" ")[1];
@@ -61,29 +43,47 @@ const getUserData = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.userId).select("-password");
 
+        if (!user) return res.status(404).json({ message: "User not found" });
 
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // Convert stored image path to Base64 if needed
-        let profilePicBase64 = "";
-        if (user.profilePic) {
-            profilePicBase64 = Buffer.from(user.profilePic, "base64").toString("base64");
-        }
-
-        res.json({
-            user: {
-                _id: user._id,
-                username: user.username,
-                email: user.email,
-                profilePic: profilePicBase64, // Send Base64 data
-            },
-        });
+        res.json({ user });
     } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching user:", error);
         res.status(500).json({ message: "Server error" });
     }
 };
+
+
+// const getUserData = async (req, res) => {
+//     try {
+//         const token = req.headers.authorization?.split(" ")[1];
+//         if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//         const user = await User.findById(decoded.userId).select("-password");
+
+
+//         if (!user) {
+//             return res.status(404).json({ message: "User not found" });
+//         }
+
+//         // Convert stored image path to Base64 if needed
+//         let profilePicBase64 = "";
+//         if (user.profilePic) {
+//             profilePicBase64 = Buffer.from(user.profilePic, "base64").toString("base64");
+//         }
+
+//         res.json({
+//             user: {
+//                 _id: user._id,
+//                 username: user.username,
+//                 email: user.email,
+//                 profilePic: profilePicBase64, // Send Base64 data
+//             },
+//         });
+//     } catch (error) {
+//         console.error("Error fetching user data:", error);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// };
 
 module.exports = { updateUserProfile, getUserData };
