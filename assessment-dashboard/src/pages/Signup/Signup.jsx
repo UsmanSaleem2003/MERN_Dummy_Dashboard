@@ -39,11 +39,11 @@ const Signup = () => {
                 navigate("/");
             } else {
                 setError(true);
-                setErrorMessage("Wrong Credentials");
+                setErrorMessage(data.message);
             }
         } catch (error) {
             setError(true);
-            setErrorMessage("Server Error");
+            setErrorMessage(error.message);
             console.error("Signup Error:", error);
         }
     };
